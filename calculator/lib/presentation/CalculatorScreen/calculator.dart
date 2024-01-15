@@ -1,4 +1,5 @@
 import 'package:calculator/constants/values.dart';
+import 'package:calculator/presentation/CalculatorScreen/widget/display.dart';
 import 'package:calculator/presentation/CalculatorScreen/widget/num_Buttons.dart';
 
 import 'package:flutter/material.dart';
@@ -11,10 +12,6 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
-
-Widget buildButton(value){
-  return Text(value);
-}
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -23,33 +20,22 @@ Widget buildButton(value){
         bottom: false,
         child: Column(children: [
           //output
-          Expanded(
-            child: SingleChildScrollView(
-             
-              child: Container(
-                alignment: Alignment.bottomRight,
-                padding: const EdgeInsets.all(16),
-                child: const Text(
-                  '0',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 48),
-                  textAlign: TextAlign.end,
-                ),
-              ),
-            ),
-          ),
-
+          Display(num1: '', num2: '', operand: '',),
           Wrap(
-            children: 
-              Values.buttonValues.map((value) => SizedBox(
-                width: screenSize.width/4,
-                height: screenSize.width/5,
-                child: NumberedButton( value: value,))).toList()
-            ,
+            children: Values.buttonValues
+                .map((value) => SizedBox(
+                    width: value == Values.n0
+                        ? screenSize.width / 2
+                        : (screenSize.width / 4),
+                    height: screenSize.width / 5,
+                    child: NumberedButton(
+                      value: value,
+                    )))
+                .toList(),
           )
           //buttons
         ]),
       ),
     );
   }
- 
 }
