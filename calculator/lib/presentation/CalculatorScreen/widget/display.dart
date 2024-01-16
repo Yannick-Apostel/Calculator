@@ -19,7 +19,7 @@ class Display extends StatelessWidget {
           child: BlocBuilder<OperandBloc, OperandState>(
             builder: (context, state) {
               return Text(
-                state.operand,
+                state.num1 + state.operand + state.num2,
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 48),
                 textAlign: TextAlign.end,
