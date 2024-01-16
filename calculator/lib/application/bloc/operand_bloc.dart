@@ -8,6 +8,7 @@ class OperandBloc extends Bloc<OperandEvent, OperandState> {
   OperandBloc() : super(OperandInitialState()) {
     
     on<OperandUpdateEvent>((event, emit) {
+      state.operand += event.newValue;
      emit(OperandUpdateState(state.operand));
     });
   }

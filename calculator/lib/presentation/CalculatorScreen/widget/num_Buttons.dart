@@ -1,9 +1,11 @@
 import 'package:calculator/Variables/parameters.dart';
+import 'package:calculator/application/bloc/operand_bloc.dart';
 
 import 'package:calculator/constants/values.dart';
 import 'package:calculator/model/calculation_model.dart';
 import 'package:calculator/presentation/CalculatorScreen/calculator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 class NumberedButton extends StatefulWidget {
@@ -27,8 +29,8 @@ class _NumberedButtonState extends State<NumberedButton> {
             borderSide: BorderSide.none),
         child: InkWell(
             onTap: () {
-              
-                Operation.num1 += widget.value;
+              context.read<OperandBloc>().add(OperandUpdateEvent(newValue: widget.value));
+                
               
               
             },
