@@ -1,17 +1,19 @@
-import 'package:calculator/bloc/calculation_bloc.dart';
+
+import 'package:calculator/Variables/parameters.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Display extends StatelessWidget {
-  final String num1;
-  final String num2;
-  final String operand;
+
+class Display extends StatefulWidget {
+ 
+
   const Display(
-      {super.key,
-      required this.num1,
-      required this.num2,
-      required this.operand});
+      {super.key,});
 
+  @override
+  State<Display> createState() => _DisplayState();
+}
+
+class _DisplayState extends State<Display> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -20,7 +22,7 @@ class Display extends StatelessWidget {
           alignment: Alignment.bottomRight,
           padding: const EdgeInsets.all(16),
           child: Text(
-            '',
+            Operation.num1,
             style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 48),
             textAlign: TextAlign.end,
           ),
