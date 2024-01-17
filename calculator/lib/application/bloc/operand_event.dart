@@ -7,3 +7,10 @@ class OperandUpdateEvent extends OperandEvent {
   final String newValue;
   OperandUpdateEvent({required this.newValue});
 }
+
+class DelEvent extends OperandEvent {
+  
+}
+class ClrEvent extends OperandEvent {
+  
+}

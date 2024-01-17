@@ -7,7 +7,6 @@ import 'package:calculator/presentation/CalculatorScreen/calculator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-
 class NumberedButton extends StatefulWidget {
   final String value;
   const NumberedButton({super.key, required this.value});
@@ -29,10 +28,15 @@ class _NumberedButtonState extends State<NumberedButton> {
             borderSide: BorderSide.none),
         child: InkWell(
             onTap: () {
-              context.read<OperandBloc>().add(OperandUpdateEvent(newValue: widget.value));
-                
-              
-              
+              if (widget.value == Values.clr) {
+                context.read<OperandBloc>().add(ClrEvent());
+              } else if (widget.value == Values.del) {
+                context.read<OperandBloc>().add(DelEvent());
+              } else {
+                context
+                    .read<OperandBloc>()
+                    .add(OperandUpdateEvent(newValue: widget.value));
+              }
             },
             child: Center(
                 child: Text(
