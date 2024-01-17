@@ -1,6 +1,11 @@
+import 'package:calculator/Variables/parameters.dart';
+import 'package:calculator/application/bloc/operand_bloc.dart';
+
 import 'package:calculator/constants/values.dart';
+import 'package:calculator/model/calculation_model.dart';
 import 'package:calculator/presentation/CalculatorScreen/calculator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NumberedButton extends StatefulWidget {
   final String value;
@@ -22,36 +27,48 @@ class _NumberedButtonState extends State<NumberedButton> {
             borderRadius: BorderRadius.circular(100),
             borderSide: BorderSide.none),
         child: InkWell(
-            onTap: ()  {},
+            onTap: () {
+              if (widget.value == Values.calculate) {
+                context.read<OperandBloc>().add(CalcEvent());
+              }
+              else if (widget.value == Values.clr) {
+                context.read<OperandBloc>().add(ClrEvent());
+              } else if (widget.value == Values.del) {
+                context.read<OperandBloc>().add(DelEvent());
+              } else if (widget.value == Values.per) {
+                context.read<OperandBloc>().add(PercentageEvent());
+              } else {
+                context
+                    .read<OperandBloc>()
+                    .add(OperandUpdateEvent(newValue: widget.value));
+              }
+            },
             child: Center(
                 child: Text(
               widget.value,
               style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 22
-              ),
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22),
             ))),
       ),
     );
   }
 
-  void onBtnTap(String value){
-    
-  }
+  void onBtnTap(String value) {}
 
-  Color getBtnColor(value){
+  Color getBtnColor(value) {
     return [Values.del, Values.clr].contains(value)
-            ? Color.fromARGB(255, 126, 250, 250)
-            : [
-                Values.per,
-                Values.multiply,
-                Values.add,
-                Values.subtract,
-                Values.divide,
-                Values.calculate
-              ].contains(value)
-                ? Colors.white
-                : const Color.fromARGB(255, 126, 180, 224);
+        ? const Color.fromARGB(255, 126, 250, 250)
+        : [
+            Values.per,
+            Values.multiply,
+            Values.add,
+            Values.subtract,
+            Values.divide,
+            Values.calculate
+          ].contains(value)
+            ? Colors.white
+            : const Color.fromARGB(255, 126, 180, 224);
   }
 }
