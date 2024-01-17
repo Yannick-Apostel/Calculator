@@ -14,8 +14,34 @@ class OperandBloc extends Bloc<OperandEvent, OperandState> {
       if (event.newValue != Values.dot &&
           int.tryParse(event.newValue) == null) {
         if (state.operand.isNotEmpty && state.num2.isNotEmpty) {
-          add(CalcEvent());
-          //TODO calculate
+          if(state.num1.isEmpty){}
+        if(state.num2.isEmpty){}
+        if(state.operand.isEmpty){}
+
+        final double number1 = double.parse(state.num1);
+        final double number2 = double.parse(state.num2);
+
+        double result =0.0;
+
+        switch (state.operand) {
+          case Values.add:
+            result= number1 + number2;
+            break;
+            case Values.subtract:
+            result= number1 - number2;
+            break;
+            case Values.multiply:
+            result= number1 * number2;
+            break;
+            case Values.divide:
+            result= number1 / number2;
+            break;
+          default:
+        }
+        state.num1 = "$result";
+        if(state.num1.endsWith('.0')){
+          state.num1=state.num1.substring(0, state.num1.length-2);
+        }
         }
         state.operand = event.newValue;
       } else if (state.num1.isEmpty || state.operand.isEmpty) {
@@ -64,8 +90,34 @@ class OperandBloc extends Bloc<OperandEvent, OperandState> {
 
     on<PercentageEvent>((event, emit) {
       if(state.num1.isNotEmpty && state.operand.isNotEmpty && state.num2.isNotEmpty){
-        add(CalcEvent());
-          //TODO first calc -> percentage
+        if(state.num1.isEmpty){}
+        if(state.num2.isEmpty){}
+        if(state.operand.isEmpty){}
+
+        final double number1 = double.parse(state.num1);
+        final double number2 = double.parse(state.num2);
+
+        double result =0.0;
+
+        switch (state.operand) {
+          case Values.add:
+            result= number1 + number2;
+            break;
+            case Values.subtract:
+            result= number1 - number2;
+            break;
+            case Values.multiply:
+            result= number1 * number2;
+            break;
+            case Values.divide:
+            result= number1 / number2;
+            break;
+          default:
+        }
+        state.num1 = "$result";
+        if(state.num1.endsWith('.0')){
+          state.num1=state.num1.substring(0, state.num1.length-2);
+        }
       }
 
       if(state.operand.isNotEmpty){
