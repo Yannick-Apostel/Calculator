@@ -27,3 +27,12 @@ final class CLRState extends OperandState {
   CLRState(String updatedOperand, String updatedNum1, String updatedNum2): super(operand: updatedOperand, num1: updatedNum1, num2: updatedNum2);
 }
 
+final class PercentageState extends OperandState {
+  
+  PercentageState(String updatedOperand, String updatedNum1, String updatedNum2): super(operand: updatedOperand, num1: updatedNum1, num2: updatedNum2);
+}
+final class CalcState extends OperandState {
+  
+  CalcState(String updatedOperand, String updatedNum1, String updatedNum2): super(operand: updatedOperand, num1: updatedNum1, num2: updatedNum2);
+}
+

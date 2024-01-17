@@ -14,3 +14,10 @@ class DelEvent extends OperandEvent {
 class ClrEvent extends OperandEvent {
   
 }
+
+class PercentageEvent extends OperandEvent {
+  
+}
+class CalcEvent extends OperandEvent {
+  
+}

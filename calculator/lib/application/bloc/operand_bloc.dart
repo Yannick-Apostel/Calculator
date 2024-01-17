@@ -14,6 +14,7 @@ class OperandBloc extends Bloc<OperandEvent, OperandState> {
       if (event.newValue != Values.dot &&
           int.tryParse(event.newValue) == null) {
         if (state.operand.isNotEmpty && state.num2.isNotEmpty) {
+          add(CalcEvent());
           //TODO calculate
         }
         state.operand = event.newValue;
@@ -37,6 +38,7 @@ class OperandBloc extends Bloc<OperandEvent, OperandState> {
         }
         state.num2 += event.newValue;
       }
+     
       //state.operand += event.newValue;
       emit(OperandUpdateState(state.operand, state.num1, state.num2));
     });
@@ -58,6 +60,52 @@ class OperandBloc extends Bloc<OperandEvent, OperandState> {
       state.num2 = '';
       state.operand = '';
       emit(OperandUpdateState(state.operand, state.num1, state.num2));
+    });
+
+    on<PercentageEvent>((event, emit) {
+      if(state.num1.isNotEmpty && state.operand.isNotEmpty && state.num2.isNotEmpty){
+        add(CalcEvent());
+          //TODO first calc -> percentage
+      }
+
+      if(state.operand.isNotEmpty){
+
+      }
+
+      final number = double.parse(state.num1);
+      emit(OperandUpdateState('', "${(number/100)}", ''));
+    });
+
+    on<CalcEvent>((event, emit) {
+        if(state.num1.isEmpty){}
+        if(state.num2.isEmpty){}
+        if(state.operand.isEmpty){}
+
+        final double number1 = double.parse(state.num1);
+        final double number2 = double.parse(state.num2);
+
+        double result =0.0;
+
+        switch (state.operand) {
+          case Values.add:
+            result= number1 + number2;
+            break;
+            case Values.subtract:
+            result= number1 - number2;
+            break;
+            case Values.multiply:
+            result= number1 * number2;
+            break;
+            case Values.divide:
+            result= number1 / number2;
+            break;
+          default:
+        }
+        state.num1 = "$result";
+        if(state.num1.endsWith('.0')){
+          state.num1=state.num1.substring(0, state.num1.length-2);
+        }
+        emit(OperandUpdateState('', state.num1, ''));
     });
   }
 }

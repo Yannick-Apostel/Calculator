@@ -28,10 +28,15 @@ class _NumberedButtonState extends State<NumberedButton> {
             borderSide: BorderSide.none),
         child: InkWell(
             onTap: () {
-              if (widget.value == Values.clr) {
+              if (widget.value == Values.calculate) {
+                context.read<OperandBloc>().add(CalcEvent());
+              }
+              else if (widget.value == Values.clr) {
                 context.read<OperandBloc>().add(ClrEvent());
               } else if (widget.value == Values.del) {
                 context.read<OperandBloc>().add(DelEvent());
+              } else if (widget.value == Values.per) {
+                context.read<OperandBloc>().add(PercentageEvent());
               } else {
                 context
                     .read<OperandBloc>()
