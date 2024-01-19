@@ -16,8 +16,11 @@ An android math calculator
 
 
 ## Screenshots
+<p align="center">
+  <img src="https://github.com/Yannick-Apostel/Calculator/blob/main/asset/preview.png" width="240">
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+</p>
+
 
 
     
