@@ -1,3 +1,4 @@
+import 'package:calculator/Theme.dart';
 import 'package:calculator/application/bloc/operand_bloc.dart';
 import 'package:calculator/presentation/CalculatorScreen/calculator.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       create: (context) => OperandBloc(),
       child: MaterialApp(
         title: 'Calculator',
-        theme: ThemeData.dark(),
+        theme: AppTheme.lightTheme,
         home: const CalculatorScreen(),
       ),
     );
