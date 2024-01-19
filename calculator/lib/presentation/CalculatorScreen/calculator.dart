@@ -32,7 +32,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               //output
               const Display(),
               
-              const ChangeThemeButton(isLightmodeOn: true,),
+              const ChangeThemeButton(),
               
               Wrap(
                 children: Values.buttonValues
