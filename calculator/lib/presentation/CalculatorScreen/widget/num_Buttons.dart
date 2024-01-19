@@ -1,53 +1,50 @@
-import 'package:calculator/Variables/parameters.dart';
+
+import 'package:calculator/Theme.dart';
 import 'package:calculator/application/bloc/operand_bloc.dart';
 
 import 'package:calculator/constants/values.dart';
-import 'package:calculator/model/calculation_model.dart';
-import 'package:calculator/presentation/CalculatorScreen/calculator.dart';
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class NumberedButton extends StatefulWidget {
+class NumberedButton extends StatelessWidget {
   final String value;
   const NumberedButton({super.key, required this.value});
 
   @override
-  State<NumberedButton> createState() => _NumberedButtonState();
-}
-
-class _NumberedButtonState extends State<NumberedButton> {
-  @override
   Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Material(
         clipBehavior: Clip.hardEdge,
-        color: getBtnColor(widget.value),
+        color: getBtnColor(value, themeData),
         shape: OutlineInputBorder(
             borderRadius: BorderRadius.circular(100),
             borderSide: BorderSide.none),
         child: InkWell(
             onTap: () {
-              if (widget.value == Values.calculate) {
+              if (value == Values.calculate) {
                 context.read<OperandBloc>().add(CalcEvent());
               }
-              else if (widget.value == Values.clr) {
+              else if (value == Values.clr) {
                 context.read<OperandBloc>().add(ClrEvent());
-              } else if (widget.value == Values.del) {
+              } else if (value == Values.del) {
                 context.read<OperandBloc>().add(DelEvent());
-              } else if (widget.value == Values.per) {
+              } else if (value == Values.per) {
                 context.read<OperandBloc>().add(PercentageEvent());
               } else {
                 context
                     .read<OperandBloc>()
-                    .add(OperandUpdateEvent(newValue: widget.value));
+                    .add(OperandUpdateEvent(newValue: value));
               }
             },
             child: Center(
                 child: Text(
-              widget.value,
-              style: const TextStyle(
-                  color: Colors.black,
+              value,
+              style:  TextStyle(
+                  color: themeData.colorScheme.primary,
                   fontWeight: FontWeight.bold,
                   fontSize: 22),
             ))),
@@ -55,11 +52,10 @@ class _NumberedButtonState extends State<NumberedButton> {
     );
   }
 
-  void onBtnTap(String value) {}
-
-  Color getBtnColor(value) {
-    return [Values.del, Values.clr].contains(value)
-        ? const Color.fromARGB(255, 126, 250, 250)
+  Color getBtnColor(value, ThemeData themeData) {
+    
+             return [Values.del, Values.clr].contains(value)
+        ?  themeData.colorScheme.secondary
         : [
             Values.per,
             Values.multiply,
@@ -68,7 +64,7 @@ class _NumberedButtonState extends State<NumberedButton> {
             Values.divide,
             Values.calculate
           ].contains(value)
-            ? Colors.white
-            : const Color.fromARGB(255, 126, 180, 224);
+            ? themeData.colorScheme.onTertiary
+            : themeData.colorScheme.tertiary;
   }
 }

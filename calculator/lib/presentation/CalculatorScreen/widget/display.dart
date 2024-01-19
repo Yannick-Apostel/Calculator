@@ -1,4 +1,4 @@
-import 'package:calculator/Variables/parameters.dart';
+
 import 'package:calculator/application/bloc/operand_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +10,7 @@ class Display extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
+   final themeData = Theme.of(context);
     return Expanded(
       child: SingleChildScrollView(
         child: Container(
@@ -21,7 +21,7 @@ class Display extends StatelessWidget {
               return Text(
                 state.num1 + state.operand + state.num2,
                 style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 48),
+                     TextStyle(fontWeight: FontWeight.bold, fontSize: 48, color: themeData.colorScheme.onPrimary),
                 textAlign: TextAlign.end,
               );
             },

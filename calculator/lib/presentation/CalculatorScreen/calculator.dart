@@ -1,4 +1,5 @@
 import 'package:calculator/constants/values.dart';
+import 'package:calculator/presentation/CalculatorScreen/widget/changeThemeButton.dart';
 import 'package:calculator/presentation/CalculatorScreen/widget/display.dart';
 import 'package:calculator/presentation/CalculatorScreen/widget/num_Buttons.dart';
 
@@ -29,7 +30,10 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
               },
             child: Column(children: [
               //output
-              Display(),
+              const Display(),
+              
+              const ChangeThemeButton(),
+              
               Wrap(
                 children: Values.buttonValues
                     .map((value) => SizedBox(
